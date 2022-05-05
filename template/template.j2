@@ -1,0 +1,70 @@
+{%- macro intro() -%}
+    {%- if ((destination type)) != 'None' -%}
+        {{name}} అనేది ఒక {{destination type}}.
+    {%- endif -%}
+    
+    
+    {%- if (country) != 'None' and (state) != "None" and (city) != "None" -%}
+        {{name}} అనే సందర్శ ప్రదేశం {{country}} దేశంలోని {{state}} రాష్ట్రంకి చందిన {{city}} నగరంలో ఉంది.
+    {%- elif (country)!= "None" and (city) != "None" -%}
+        {{name}} అనే సందర్శ ప్రదేశం {{country}} దేశంలోని {{city}} నగరంలో ఉంది.
+    {%- elif ((country)) != 'None' -%}
+        {{name}} అనే సందర్శ ప్రదేశం {{city}}లో ఉంది.
+    {%- endif -%}
+    
+    
+    {%- if ((continent)) != 'None' -%}
+        ఇది {{continent}} ఖండంలో ఉంది.
+    {%- endif -%}
+{%- endmacro -%}    
+    
+
+{%- macro details() -%}
+        {{country}}లోని ఉత్తమ సందర్శ ప్రదేశాలలో {{name}} ఒకటి. 
+        
+    {%- if ((visiters per year)) != 'None' -%}   
+        ప్రతి ఏట {{name}}ని చూసేందుకు {{visiters per year}} సందర్శకులు వస్తారు.
+    {%- else -%}
+        ప్రతి ఏట {{name}}ని చూసేందుకు చాలా మంది సందర్శకులు వస్తారు.
+    {%- endif -%}
+    
+    
+    {% set mode = how_to_reach.split(',') %}
+    {%- if ((mode)) != 'None' and mode|length == 2 -%}
+        {{mode[0]}} మరియు {{mode[0]}} మార్గాల ద్వారా {{name}}కి చేరుకోవచ్చు.
+    {%- elif ((list1)) != 'None' and list1|length == 3 -%}
+        {{mode[0]}}, {{mode[0]}} మరియు {{mode[1]}} మార్గాల ద్వారా {{name}}కి చేరుకోవచ్చు.
+    {%- endif -%}
+    
+    
+    {% set months = best_time_to_visit.split(',') %}
+    {%- if ((months)) != 'None' and months|length == 1 -%}
+        దీనిని సందర్శించడానికి  {{months[0]}} ఉత్తమమైన సమయం.
+    {%- elif ((months)) != 'None' and months|length == 2 -%}
+        దీనిని సందర్శించడానికి {{months[0]}} మరియు {{months[1]}} ఉత్తమమైన సమయాలు.
+    {%- endif -%}
+    
+    
+    {% set temparetures = temperature.split(',') %}
+    {%- if ((temperatures)) != 'None' and temperatures|length == 1 -%}
+        ఈ ప్రదేశం యొక్క ఉష్ణోగ్రత:- {{temperatures[0]}}
+    {%- elif ((temperatures)) != 'None' and temperatures|length == 2 -%}
+        ఈ ప్రదేశం యొక్క ఉష్ణోగ్రతలు:- {{temperatures[0]}}, {{temperatures[1]}}
+{%- endmacro -%}
+
+
+{%- macro ending() -%}
+    {% hotels = hotels_nearby.split(' | ') %}
+    {%- if ((hotels)) !='None' and hotels|length == 1 -%}
+        పర్యాటకులు {{hotels[0]}} ఇతరత్రా హోటల్స్లో బస చేయవచ్చు.
+    {%- elif ((hotels)) !='None' and hotels|length == 2 -%}
+        పర్యాటకులు {{hotels[0]}}, {{hotels[1]}} ఇతరత్రా హోటల్స్లో బస చేయవచ్చు.
+    {%- elif ((hotels)) !='None' and hotels|length == 3 -%}
+        పర్యాటకులు {{hotels[0]}}, {{hotels[1]}}, {{hotels[2]}} ఇతరత్రా హోటల్స్లో బస చేయవచ్చు.  
+    {%- endif -%}
+    
+    
+    {%- if destination_rating != 'None' -%}
+        గూగుల్ ట్రావెల్స్ వారు {{name}} కి {{destination_rating}} రేటింగ్స్ ని ఇచ్చారు.
+    
+       
